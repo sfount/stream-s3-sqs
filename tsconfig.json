@@ -5,6 +5,7 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
+    "esModuleInterop": true,
     "outDir": "out/",
     "lib": [
       "es2015"
