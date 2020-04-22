@@ -45,7 +45,7 @@ export default class SQSConsumer implements Consumer {
 		for (const batch of batches) {
 			const params: SQS.SendMessageBatchRequest = {
 				QueueUrl: this.queueUrl,
-				Entries: batch.map(this.messageBuilder.transform)
+				Entries: [ ...batch ].map(this.messageBuilder.transform)
 			}
 			sqs.sendMessageBatch(params, (error: AWSError, data) => {
 				if (error) {
@@ -65,7 +65,8 @@ export default class SQSConsumer implements Consumer {
 					'batch_id': batchId,
 					'messages': batch.map((entry, index) => ({
 						'id': params.Entries[index].Id,
-						'primary_column': entry[Object.keys(entry)[0]]
+						'primary_column': entry[Object.keys(entry)[0]],
+						'body': entry
 					})),
 					'failed': data.Failed.map((entry) => ({
 						'id': entry.Id,
