@@ -18,8 +18,8 @@ describe('message formatter', () => {
 		expect(body).toHaveProperty('resource_external_id')
 		expect(body).toHaveProperty('parent_resource_external_id')
 		expect(body).toHaveProperty('resource_type')
-		expect(body).toHaveProperty('event_date')
-		expect(body).toHaveProperty('event_data')
+		expect(body).toHaveProperty('timestamp')
+		expect(body).toHaveProperty('event_details')
 	})
 
 	test('ignores reserved properties if not needed on transaction', () => {
@@ -34,7 +34,7 @@ describe('message formatter', () => {
 		const formatted = messageBuilder.transform(messageFromS3Csv)
 		const body = JSON.parse(formatted.MessageBody)
 
-		expect(body.event_data.reference).toBe('some-reference')
-		expect(body.event_data.amount).toBe('some-amount')
+		expect(body.event_details.reference).toBe('some-reference')
+		expect(body.event_details.amount).toBe('some-amount')
 	})
 })

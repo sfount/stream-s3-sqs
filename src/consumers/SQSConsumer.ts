@@ -65,7 +65,8 @@ export default class SQSConsumer implements Consumer {
 					'batch_id': batchId,
 					'messages': batch.map((entry, index) => ({
 						'id': params.Entries[index].Id,
-						'primary_column': entry[Object.keys(entry)[0]]
+						'primary_column': entry[Object.keys(entry)[0]],
+						'body': entry
 					})),
 					'failed': data.Failed.map((entry) => ({
 						'id': entry.Id,
