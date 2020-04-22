@@ -6,6 +6,7 @@ import Consumer from './Consumer'
 import { Message, ProgressPage } from './../providers/Provider'
 import Transformer from './../transformers/Transformer'
 import logger from '../utils/logger'
+import { AWSError } from 'aws-sdk/lib/error'
 
 const sqs = new SQS()
 
@@ -46,11 +47,16 @@ export default class SQSConsumer implements Consumer {
 				QueueUrl: this.queueUrl,
 				Entries: batch.map(this.messageBuilder.transform)
 			}
-			sqs.sendMessageBatch(params, (error: Error) => {
+			sqs.sendMessageBatch(params, (error: AWSError, data) => {
 				if (error) {
 					logger.error('Consumer: failed to emit message batch', {
 						'progress': currentProgress,
-						'batch_id': batchId
+						'batch_id': batchId,
+						'message': error.message,
+						'code': error.code,
+						'name': error.name,
+						'request_id': error.requestId,
+						'region': error.region
 					})
 					throw new Error(`SQSConsumer failed to process at [progress=${currentProgress}]`)
 				}
@@ -60,6 +66,15 @@ export default class SQSConsumer implements Consumer {
 					'messages': batch.map((entry, index) => ({
 						'id': params.Entries[index].Id,
 						'primary_column': entry[Object.keys(entry)[0]]
+					})),
+					'failed': data.Failed.map((entry) => ({
+						'id': entry.Id,
+						'code': entry.Code,
+						'message': entry.Message
+					})),
+					'successful': data.Successful.map((entry) => ({
+						'id': entry.Id,
+						'sqs_message_id': entry.MessageId
 					}))
 				})
 			})
