@@ -24,6 +24,14 @@ export default class S3Provider implements Provider {
 		}
 
 		logger.info('Provider: using AWS S3', { 'bucket_name': bucketName, 'source_file': sourceFile })
+		logger.info('Debug: ECS environment has', {
+			AWS_CONTAINER_CREDENTIALS_RELATIVE_URI: process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI,
+			HTTP_NON_PROXY_HOSTS: process.env.HTTP_NON_PROXY_HOSTS,
+			HTTP_PROXY: process.env.HTTP_PROXY,
+			HTTP_PROXY_ENABLED: process.env.HTTP_PROXY_ENABLED,
+			HTTPS_PROXY: process.env.HTTPS_PROXY,
+			NO_PROXY: process.env.NO_PROXY
+		})
 		this.bucketName = bucketName
 		this.sourceFile = sourceFile
 	}

@@ -5,5 +5,18 @@ COPY src/ src
 COPY tsconfig.json tsconfig.json
 RUN npm run build
 RUN npm prune --production
-USER node
+
+ENV AWSCLI_VERSION "1.14.10"
+
+RUN apk add --update \
+		curl \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+    && pip install awscli==$AWSCLI_VERSION --upgrade --user \
+    && apk --purge -v del py-pip \
+    && rm -rf /var/cache/apk/*
+
+# USER node
 CMD [ "npm", "start" ]
