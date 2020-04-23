@@ -20,9 +20,9 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 	const reservedKeys = [
 		{ key: 'transaction_id', target: 'resource_external_id' },
 		{ key: 'parent_transaction_id', target: 'parent_resource_external_id' },
-		{ key: 'resource_type', target: 'resource_type' },
+		{ key: 'transaction_type', target: 'resource_type' },
 		{ key: 'event_date', target: 'timestamp' },
-		{ key: 'event_type', target: 'event_type' }
+		{ key: 'event_name', target: 'event_type' }
 	]
 	const formatted: PaymentEventMessage = { event_details: {} }
 

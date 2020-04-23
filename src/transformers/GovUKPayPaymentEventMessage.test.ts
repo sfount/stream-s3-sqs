@@ -4,8 +4,8 @@ describe('message formatter', () => {
 		'transaction_id': 'some-transaction-id',
 		'event_date': 'some-event-date',
 		'parent_transaction_id': 'some-parent-transaction-id',
-		'event_type': 'some-event-type',
-		'resource_type': 'some-resource-type',
+		'event_name': 'some-event-type',
+		'transaction_type': 'some-resource-type',
 		'reference': 'some-reference',
 		'amount': 'some-amount'
 	}
@@ -20,6 +20,7 @@ describe('message formatter', () => {
 		expect(body).toHaveProperty('resource_type')
 		expect(body).toHaveProperty('timestamp')
 		expect(body).toHaveProperty('event_details')
+		expect(body).toHaveProperty('event_type')
 	})
 
 	test('ignores reserved properties if not needed on transaction', () => {
