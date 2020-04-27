@@ -39,7 +39,9 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 	// put these in `event_data`
 	for (const paymentEventMessageKey in message) {
 		const paymentEventMessageValue = message[paymentEventMessageKey] && message[paymentEventMessageKey].trim()
-		formatted.event_details[paymentEventMessageKey] = paymentEventMessageValue
+		if (paymentEventMessageValue) {
+			formatted.event_details[paymentEventMessageKey] = paymentEventMessageValue
+		}
 	}
 	return formatted
 }
