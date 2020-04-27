@@ -28,7 +28,7 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 
 	// initially extract the reserved properties
 	for (const reserved of reservedKeys) {
-		const reservedEntry = message[reserved.key]
+		const reservedEntry = message[reserved.key] && message[reserved.key].trim()
 		if (reservedEntry) {
 			formatted[reserved.target] = reservedEntry
 			delete message[reserved.key]
@@ -38,7 +38,8 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 	// any remaining properties will override attributes of the transaction itself
 	// put these in `event_data`
 	for (const paymentEventMessageKey in message) {
-		formatted.event_details[paymentEventMessageKey] = message[paymentEventMessageKey]
+		const paymentEventMessageValue = message[paymentEventMessageKey] && message[paymentEventMessageKey].trim()
+		formatted.event_details[paymentEventMessageKey] = paymentEventMessageValue
 	}
 	return formatted
 }
