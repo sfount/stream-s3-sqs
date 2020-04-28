@@ -5,13 +5,13 @@ import Transformer from './Transformer'
 import { Message } from './../providers/Provider'
 
 interface PaymentEventMessage {
-	event_details: { [key: string]: string };
+	event_details: { [key: string]: string } | { [key: string]: { [key: string]: string }  };
 	resource_type?: string;
 	resource_external_id?: string;
 	event_date?: string;
 	event_type?: string;
 	parent_resource_external_id?: string;
-	[key: string]: string | { [key: string]: string };
+	[key: string]: string | { [key: string]: string } | { [key: string]: { [key: string]: string }  };
 }
 
 // we can gaurantee the existence of required fields as anything with permissions
@@ -40,7 +40,17 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 	for (const paymentEventMessageKey in message) {
 		const paymentEventMessageValue = message[paymentEventMessageKey] && message[paymentEventMessageKey].trim()
 		if (paymentEventMessageValue) {
-			formatted.event_details[paymentEventMessageKey] = paymentEventMessageValue
+
+			// support only 1 level of nesting for second level attributes
+			if (paymentEventMessageKey.includes('.')) {
+				const [ topLevelKey, nestedKey ] = paymentEventMessageKey.split('.')
+				const nestedObject: { [key: string]: string } = {}
+
+				nestedObject[nestedKey] = paymentEventMessageValue
+				formatted.event_details[topLevelKey] = nestedObject
+			} else {
+				formatted.event_details[paymentEventMessageKey] = paymentEventMessageValue
+			}
 		}
 	}
 	return formatted
