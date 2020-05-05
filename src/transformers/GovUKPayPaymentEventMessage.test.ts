@@ -57,4 +57,13 @@ describe('message formatter', () => {
 		expect(body.event_details).not.toHaveProperty('value_omitted')
 		expect(body.event_details.value_included).not.toHaveProperty('some-value')
 	})
+
+	test('correctly parses correctly formatted nested headers at one depth level', () => {
+		const formatted = messageBuilder.transform({ 'nested.value': 'some-nested-value' })
+		const body = JSON.parse(formatted.MessageBody)
+
+		expect(body.event_details).toHaveProperty('nested')
+		expect(body.event_details.nested).toHaveProperty('value')
+		expect(body.event_details.nested.value).toBe('some-nested-value')
+	})
 })
