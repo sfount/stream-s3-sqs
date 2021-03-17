@@ -6,6 +6,7 @@ describe('message formatter', () => {
 		'parent_transaction_id': 'some-parent-transaction-id',
 		'event_name': 'some-event-type',
 		'transaction_type': 'some-resource-type',
+		'reproject_domain_object': 'true',
 		'reference': 'some-reference',
 		'amount': 'some-amount',
 		'will_have_empty_space': ' some-empty-space-values ',
@@ -24,6 +25,7 @@ describe('message formatter', () => {
 		expect(body).toHaveProperty('timestamp')
 		expect(body).toHaveProperty('event_details')
 		expect(body).toHaveProperty('event_type')
+		expect(body).toHaveProperty('reproject_domain_object', true)
 	})
 
 	test('ignores reserved properties if not needed on transaction', () => {

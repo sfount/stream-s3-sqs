@@ -11,7 +11,8 @@ interface PaymentEventMessage {
 	event_date?: string;
 	event_type?: string;
 	parent_resource_external_id?: string;
-	[key: string]: string | { [key: string]: string } | { [key: string]: { [key: string]: string }  };
+	reproject_domain_object?: boolean;
+	[key: string]: any | { [key: string]: string } | { [key: string]: { [key: string]: string }  };
 }
 
 // we can gaurantee the existence of required fields as anything with permissions
@@ -22,14 +23,18 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 		{ key: 'parent_transaction_id', target: 'parent_resource_external_id' },
 		{ key: 'transaction_type', target: 'resource_type' },
 		{ key: 'event_date', target: 'timestamp' },
-		{ key: 'event_name', target: 'event_type' }
+		{ key: 'event_name', target: 'event_type' },
+		{ key: 'reproject_domain_object', target: 'reproject_domain_object', targetBoolean: true }
 	]
 	const formatted: PaymentEventMessage = { event_details: {} }
 
 	// initially extract the reserved properties
 	for (const reserved of reservedKeys) {
-		const reservedEntry = message[reserved.key] && message[reserved.key].trim()
+		let reservedEntry: any = message[reserved.key] && message[reserved.key].trim()
 		if (reservedEntry) {
+			if (reserved.targetBoolean) {
+				reservedEntry = reservedEntry == 'true'
+			}
 			formatted[reserved.target] = reservedEntry
 			delete message[reserved.key]
 		}
