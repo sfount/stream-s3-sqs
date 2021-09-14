@@ -11,8 +11,14 @@ describe('message formatter', () => {
 		'amount': 'some-amount',
 		'will_have_empty_space': ' some-empty-space-values ',
 		'value_omitted': '',
-		'value_included': 'some-value'
+		'value_included': 'some-value',
 	}
+
+	// @ts-ignore
+	messageFromS3Csv["boolean_value"] = true
+	// @ts-ignore
+	messageFromS3Csv["numeric_value"] = 123
+
 	const messageBuilder = new GovUKPayPaymentEventMessage()
 
 	test('correctly transforms known reserved columns', () => {
@@ -26,6 +32,8 @@ describe('message formatter', () => {
 		expect(body).toHaveProperty('event_details')
 		expect(body).toHaveProperty('event_type')
 		expect(body).toHaveProperty('reproject_domain_object', true)
+		expect(body).toHaveProperty('event_details.boolean_value', true)
+		expect(body).toHaveProperty('event_details.numeric_value', 123)
 	})
 
 	test('ignores reserved properties if not needed on transaction', () => {

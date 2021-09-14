@@ -43,7 +43,10 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 	// any remaining properties will override attributes of the transaction itself
 	// put these in `event_data`
 	for (const paymentEventMessageKey in message) {
-		const paymentEventMessageValue = message[paymentEventMessageKey] && message[paymentEventMessageKey].trim()
+
+		const paymentEventMessageValue = message[paymentEventMessageKey] &&
+			(typeof message[paymentEventMessageKey] === 'string') ? message[paymentEventMessageKey].trim() : message[paymentEventMessageKey]
+
 		if (paymentEventMessageValue) {
 
 			// support only 1 level of nesting for second level attributes
