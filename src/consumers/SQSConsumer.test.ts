@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // using `esModuleInterop` (import SQS as) causes jest mocks to fail; force compatability with common modules
 import * as SQS from 'aws-sdk/clients/sqs'
 

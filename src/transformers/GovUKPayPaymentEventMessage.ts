@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 import crypto from 'crypto'
 import SQS = require("aws-sdk/clients/sqs")
 import Transformer from './Transformer'
