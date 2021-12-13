@@ -16,3 +16,6 @@ message JSON object with the field names expected by ledger.
 | event_name                          | event_type                                           |
 | reproject_domain_object             | reproject_domain_object                              |
 | *\<transaction detail field name\>* | event_details['*\<transaction detail field name\>*'] |
+
+## Deployment
+See https://pay-team-manual.cloudapps.digital/manual/how-to/ad-hoc-tasks.html#deploying-transaction-updater
