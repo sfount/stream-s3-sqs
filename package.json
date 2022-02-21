@@ -16,6 +16,9 @@
   "keywords": [],
   "author": "Steven Fountain",
   "license": "ISC",
+  "engines": {
+    "node": "^12.22.10"
+  },  
   "dependencies": {
     "aws-sdk": "^2.1044.0",
     "winston": "3.2.1"
