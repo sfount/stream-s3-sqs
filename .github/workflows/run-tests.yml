@@ -1,16 +1,14 @@
 name: Github Actions Tests
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
+  workflow_call:
 
 permissions:
   contents: read
 
 jobs:
-  unit-tests:
+  test:
     runs-on: ubuntu-18.04
     name: Unit tests
 
@@ -27,6 +25,8 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
+      - name: Security audit
+        run: npm audit    
       - name: Install dependencies
         run: npm ci
       - name: Run lint
