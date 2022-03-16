@@ -8,6 +8,8 @@ on:
 permissions:
   contents: read
 
+concurrency: stream-s3-sqs-post-merge
+
 jobs:
   tests:
     uses: ./.github/workflows/run-tests.yml
