@@ -18,4 +18,7 @@ message JSON object with the field names expected by ledger.
 | *\<transaction detail field name\>* | event_details['*\<transaction detail field name\>*'] |
 
 ## Deployment
-See https://pay-team-manual.cloudapps.digital/manual/how-to/ad-hoc-tasks.html#deploying-transaction-updater
+
+Once merged, Concourse builds the image and pushes to ECR. However the deployment is currently done manually.
+
+See https://pay-team-manual.cloudapps.digital/manual/how-to/ad-hoc-tasks.html#deploying-transaction-updater for more details.
