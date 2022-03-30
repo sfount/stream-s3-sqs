@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 12.22.10
       - name: Cache NPM packages
-        uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed
+        uses: actions/cache@136d96b4aee02b1f0de3ba493b1d47135042d9c0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
