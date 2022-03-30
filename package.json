@@ -33,7 +33,7 @@
     "eslint": "8.4.1",
     "jest": "^27.5.1",
     "source-map-support": "0.5.16",
-    "ts-jest": "^27.0.5",
+    "ts-jest": "^27.1.4",
     "typescript": "^3.8.3"
   }
 }
