@@ -1,4 +1,4 @@
-FROM node:12.22.10-alpine3.15@sha256:f150ebf9402f0dd6a9c4cb208ed64884cfa7c8a6ccae3f749a7b12156c25ad88
+FROM node:16.14.2-alpine3.15@sha256:5e20a4e2e52daa1743006c224f2971b1218201e284d17c6eff4a696c9020f1a2
 COPY package.json package-lock.json ./
 RUN npm ci --no-progress
 COPY src/ src

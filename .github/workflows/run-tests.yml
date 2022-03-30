@@ -18,7 +18,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a
         with:
-          node-version: 12.22.10
+          node-version: 16.14.2
       - name: Cache NPM packages
         uses: actions/cache@136d96b4aee02b1f0de3ba493b1d47135042d9c0
         with:
