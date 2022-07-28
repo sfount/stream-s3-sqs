@@ -12,6 +12,8 @@ interface PaymentEventMessage {
 	event_type?: string;
 	parent_resource_external_id?: string;
 	reproject_domain_object?: boolean;
+	service_id?: string;
+	live?: string;
 	[key: string]: any | { [key: string]: string } | { [key: string]: { [key: string]: string }  };
 }
 
@@ -24,7 +26,9 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 		{ key: 'transaction_type', target: 'resource_type' },
 		{ key: 'event_date', target: 'timestamp' },
 		{ key: 'event_name', target: 'event_type' },
-		{ key: 'reproject_domain_object', target: 'reproject_domain_object', targetBoolean: true }
+		{ key: 'reproject_domain_object', target: 'reproject_domain_object', targetBoolean: true },
+		{ key: 'service_id', target: 'service_id' },
+		{ key: 'live', target:'live', targetBoolean: true}
 	]
 	const formatted: PaymentEventMessage = { event_details: {} }
 
