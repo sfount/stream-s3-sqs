@@ -7,6 +7,8 @@ describe('message formatter', () => {
 		'event_name': 'some-event-type',
 		'transaction_type': 'some-resource-type',
 		'reproject_domain_object': 'true',
+		'service_id': 'some-service-id',
+		'live': 'true',
 		'reference': 'some-reference',
 		'amount': 'some-amount',
 		'will_have_empty_space': ' some-empty-space-values ',
@@ -32,6 +34,8 @@ describe('message formatter', () => {
 		expect(body).toHaveProperty('event_details')
 		expect(body).toHaveProperty('event_type')
 		expect(body).toHaveProperty('reproject_domain_object', true)
+		expect(body).toHaveProperty('service_id')
+		expect(body).toHaveProperty('live', true)
 		expect(body).toHaveProperty('event_details.boolean_value', true)
 		expect(body).toHaveProperty('event_details.numeric_value', 123)
 	})

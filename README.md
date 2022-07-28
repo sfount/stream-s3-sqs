@@ -15,6 +15,8 @@ message JSON object with the field names expected by ledger.
 | event_date                          | timestamp                                            |
 | event_name                          | event_type                                           |
 | reproject_domain_object             | reproject_domain_object                              |
+| service_id                          | service_id                                           |
+| live                                | live                                                 |
 | *\<transaction detail field name\>* | event_details['*\<transaction detail field name\>*'] |
 
 ## Deployment
