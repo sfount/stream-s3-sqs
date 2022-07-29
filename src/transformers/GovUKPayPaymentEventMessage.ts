@@ -37,7 +37,7 @@ function formatPaymentEventMessage(message: Message): PaymentEventMessage {
 		let reservedEntry: any = message[reserved.key] && message[reserved.key].trim()
 		if (reservedEntry) {
 			if (reserved.targetBoolean) {
-				reservedEntry = reservedEntry == 'true'
+				reservedEntry = reservedEntry.toLocaleLowerCase() == 'true'
 			}
 			formatted[reserved.target] = reservedEntry
 			delete message[reserved.key]

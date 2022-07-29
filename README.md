@@ -21,6 +21,4 @@ message JSON object with the field names expected by ledger.
 
 ## Deployment
 
-Once merged, Concourse builds the image and pushes to ECR. However the deployment is currently done manually.
-
-See https://pay-team-manual.cloudapps.digital/manual/how-to/ad-hoc-tasks.html#deploying-transaction-updater for more details.
+Changes are automatically deployed. See https://pay-team-manual.cloudapps.digital/manual/how-to/ad-hoc-tasks.html#deploying-transaction-updater for more details.

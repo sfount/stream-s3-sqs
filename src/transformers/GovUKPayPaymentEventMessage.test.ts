@@ -90,4 +90,16 @@ describe('message formatter', () => {
 		expect(body.event_details.nested).toHaveProperty('value')
 		expect(body.event_details.nested.value).toBe('some-nested-value')
 	})
+
+	test('correctly parses reserved entry boolean ignoring case', () => {
+		const formatted = messageBuilder.transform({
+			'live': 'TRUE',
+			'reproject_domain_object': 'FALSE'
+		})
+		const body = JSON.parse(formatted.MessageBody)
+
+		expect(body).toHaveProperty('live', true)
+		expect(body).toHaveProperty('reproject_domain_object', false)
+	})
+
 })
