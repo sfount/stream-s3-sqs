@@ -17,7 +17,7 @@
   "author": "Steven Fountain",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "2.620.0",
+    "aws-sdk": "2.1354.0",
     "winston": "3.2.1"
   },
   "devDependencies": {
